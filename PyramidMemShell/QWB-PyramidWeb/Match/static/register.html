@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharaoh’s Pyramid</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<style>
+    * {
+        font-family: "Poppins";
+    }
+    body {
+        user-select: none;
+        overflow-y: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #dde5f4;
+        height: 100vh;
+    }
+    .screen-1 {
+        background: #f1f7fe;
+        padding: 2em;
+        display: flex;
+        flex-direction: column;
+        border-radius: 30px;
+        box-shadow: 0 0 2em #e6e9f9;
+        gap: 2em;
+    }
+    .screen-1 .logo {
+        margin-top: -3em;
+    }
+    .screen-1 .email, .screen-1 .password {
+        background: white;
+        box-shadow: 0 0 2em #e6e9f9;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        border-radius: 20px;
+        color: #4d4d4d;
+    }
+    .screen-1 .email input, .screen-1 .password input {
+        outline: none;
+        border: none;
+    }
+    .screen-1 .email input::placeholder, .screen-1 .password input::placeholder {
+        color: black;
+        font-size: 0.9em;
+    }
+    .screen-1 .login {
+        padding: 1em;
+        background: #3e4684;
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-weight: 600;
+    }
+    .screen-1 .footer {
+        display: flex;
+        justify-content: space-around;
+        font-size: 0.7em;
+        color: #5e5e5e;
+        gap: 14em;
+        padding-bottom: 10em;
+    }
+    button {
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+   <div class="screen-1" id="app">
+      <svg class="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="300" height="300" viewbox="0 0 640 480" xml:space="preserve">
+        <g transform="matrix(3.31 0 0 3.31 320.4 240.4)">
+          <circle style="fill: rgb(61,71,133);" cx="0" cy="0" r="40"></circle>
+        </g>
+        <g transform="matrix(0.98 0 0 0.98 268.7 213.7)">
+          <circle style="fill: rgb(255,255,255);" cx="0" cy="0" r="40"></circle>
+        </g>
+        <g transform="matrix(1.01 0 0 1.01 362.9 210.9)">
+          <circle style="fill: rgb(255,255,255);" cx="0" cy="0" r="40"></circle>
+        </g>
+        <g transform="matrix(0.92 0 0 0.92 318.5 286.5)">
+          <circle style="fill: rgb(255,255,255);" cx="0" cy="0" r="40"></circle>
+        </g>
+        <g transform="matrix(0.16 -0.12 0.49 0.66 290.57 243.57)">
+          <polygon style="fill: rgb(255,255,255);" points="-50,-50 -50,50 50,50 50,-50 "></polygon>
+        </g>
+        <g transform="matrix(0.16 0.1 -0.44 0.69 342.03 248.34)">
+          <polygon style="fill: rgb(255,255,255);" vector-effect="non-scaling-stroke" points="-50,-50 -50,50 50,50 50,-50 "></polygon>
+        </g>
+      </svg>
+      <div class="email">
+        <label for="email">用户名</label>
+        <div class="sec-2">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input type="text" v-model="username" placeholder="输入用户名" />
+        </div>
+      </div>
+      <div class="password">
+        <label for="password">密码</label>
+        <div class="sec-2">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input class="pas" type="password" v-model="password" placeholder="输入密码" />
+          <ion-icon class="show-hide" name="eye-outline"></ion-icon>
+        </div>
+      </div>
+      <button class="login" @click="register">注册</button>
+   </div>
+   <script>
+       new Vue({
+           el: '#app',
+           data: {
+               username: '',
+               password: ''
+           },
+           methods: {
+               register() {
+                   const url = `/api/register?username=${encodeURIComponent(this.username)}&password=${encodeURIComponent(this.password)}`;
+                   fetch(url)
+                   .then(response => response.text())
+                   .then(data => {
+                       alert('Registration Response: ' + data);
+                   })
+                   .catch(error => {
+                       alert('Error: ' + error.message);
+                   });
+               }
+           }
+       });
+   </script>
+</body>
+</html>exp.py
+web
